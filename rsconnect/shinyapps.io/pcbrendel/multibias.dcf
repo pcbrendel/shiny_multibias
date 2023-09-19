@@ -5,8 +5,5 @@ account: pcbrendel
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 605661
-bundleId: 1769575
+bundleId: 7702803
 url: https://pcbrendel.shinyapps.io/multibias/
-when: 1545092586.10664
-asMultiple: FALSE
-asStatic: FALSE

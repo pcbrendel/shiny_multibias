@@ -7,6 +7,7 @@ rsconnect::setAccountInfo(name = "pcbrendel",
 
 # test app
 runApp()
+stopApp()
 
 # deploy app
 deployApp()

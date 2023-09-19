@@ -61,8 +61,8 @@ ui <- navbarPage(
       img(src = "https://www.rstudio.com/wp-content/uploads/2014/04/shiny.png",
           height = "30px"),
       "by",
-      img(src = paste0("https://www.rstudio.com/wp-content/uploads/2014/07/",
-                       "RStudio-Logo-Blue-Gray.png"),
+      img(src = paste0("https://www.rstudio.com/wp-content/uploads/2018/10/",
+                       "RStudio-Logo.png"),
           height = "30px"),
       "."
     )
@@ -3101,111 +3101,405 @@ server <- function(input, output) {
           if (input$distribution == "Uniform" && !is.null(input$distribution)
               && !is.null(input$prob_bias_param) && !is.null(input$method)) {
             list(
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_0_min", HTML("&alpha;<sub>0</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_0_max", HTML("&alpha;<sub>0</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_x_min", HTML("&alpha;<sub>1</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_x_max", HTML("&alpha;<sub>1</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_y_min", HTML("&alpha;<sub>2</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("u1_y_max", HTML("&alpha;<sub>2</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_0_min", HTML("&delta;<sub>0</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_0_max", HTML("&delta;<sub>0</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_xstar_min", HTML("&delta;<sub>1</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_xstar_max", HTML("&delta;<sub>1</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_y_min", HTML("&delta;<sub>2</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("x1_y_max", HTML("&delta;<sub>2</sub> max:"), value = 1, step = .1)),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_0_min",
+                  HTML("&alpha;<sub>0</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_0_max",
+                  HTML("&alpha;<sub>0</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_x_min",
+                  HTML("&alpha;<sub>1</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_x_max",
+                  HTML("&alpha;<sub>1</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_y_min",
+                  HTML("&alpha;<sub>2</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "u1_y_max",
+                  HTML("&alpha;<sub>2</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_0_min",
+                  HTML("&delta;<sub>0</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_0_max",
+                  HTML("&delta;<sub>0</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_xstar_min",
+                  HTML("&delta;<sub>1</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_xstar_max",
+                  HTML("&delta;<sub>1</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_y_min",
+                  HTML("&delta;<sub>2</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "x1_y_max",
+                  HTML("&delta;<sub>2</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
               if (c_length == 1) {
                 list(
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c_min", HTML("&delta;<sub>3</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c_max", HTML("&delta;<sub>3</sub> max:"), value = 1, step = .1))
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c_min",
+                      HTML("&delta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c_max",
+                      HTML("&delta;<sub>3</sub> max:"),
+                      value = 1, step = .1
+                    )
+                  )
                 )
               },
               if (c_length == 2) {
                 list(
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c1_min", HTML("&delta;<sub>3</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c1_max", HTML("&delta;<sub>3</sub> max:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c2_min", HTML("&delta;<sub>4</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c2_max", HTML("&delta;<sub>4</sub> max:"), value = 1, step = .1))
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c1_min",
+                      HTML("&delta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c1_max",
+                      HTML("&delta;<sub>3</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c2_min",
+                      HTML("&delta;<sub>4</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c2_max",
+                      HTML("&delta;<sub>4</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  )
                 )
               },
               if (c_length == 3) {
                 list(
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c1_min", HTML("&delta;<sub>3</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c1_max", HTML("&delta;<sub>3</sub> max:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c2_min", HTML("&delta;<sub>4</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c2_max", HTML("&delta;<sub>4</sub> max:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c3_min", HTML("&delta;<sub>5</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("x1_c3_max", HTML("&delta;<sub>5</sub> max:"), value = 1, step = .1))
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c1_min",
+                      HTML("&delta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c1_max",
+                      HTML("&delta;<sub>3</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c2_min",
+                      HTML("&delta;<sub>4</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c2_max",
+                      HTML("&delta;<sub>4</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c3_min",
+                      HTML("&delta;<sub>5</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "x1_c3_max",
+                      HTML("&delta;<sub>5</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  )
                 )
               },
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_0_min", HTML("&beta;<sub>0</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_0_max", HTML("&beta;<sub>0</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_xstar_min", HTML("&beta;<sub>1</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_xstar_max", HTML("&beta;<sub>1</sub> max:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_y_min", HTML("&beta;<sub>2</sub> min:"), value = 1, step = .1)),
-              tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                       numericInput("s1_y_max", HTML("&beta;<sub>2</sub> max:"), value = 1, step = .1)),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_0_min",
+                  HTML("&beta;<sub>0</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_0_max",
+                  HTML("&beta;<sub>0</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_xstar_min",
+                  HTML("&beta;<sub>1</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_xstar_max",
+                  HTML("&beta;<sub>1</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_y_min",
+                  HTML("&beta;<sub>2</sub> min:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
+              tags$div(
+                style = param_style,
+                numericInput(
+                  "s1_y_max",
+                  HTML("&beta;<sub>2</sub> max:"),
+                  value = 1,
+                  step = .1
+                )
+              ),
               if (c_length == 1) {
                 list(
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c_min", HTML("&beta;<sub>3</sub> min:"), value = 1, step = .1)),
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c_max", HTML("&beta;<sub>3</sub> max:"), value = 1, step = .1))
-              )},
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c_min",
+                      HTML("&beta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c_max",
+                      HTML("&beta;<sub>3</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  )
+                )
+              },
               if (c_length == 2) {
                 list(
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c1_min", HTML("&beta;<sub>3</sub> min:"), value = 1, step = .1)),
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c1_max", HTML("&beta;<sub>3</sub> max:"), value = 1, step = .1)),
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c2_min", HTML("&beta;<sub>4</sub> min:"), value = 1, step = .1)),
-                tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                         numericInput("s1_c2_max", HTML("&beta;<sub>4</sub> max:"), value = 1, step = .1))
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c1_min",
+                      HTML("&beta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c1_max",
+                      HTML("&beta;<sub>3</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c2_min",
+                      HTML("&beta;<sub>4</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c2_max",
+                      HTML("&beta;<sub>4</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  )
                 )
               },
               if (c_length == 3) {
                 list(
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c1_min", HTML("&beta;<sub>3</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c1_max", HTML("&beta;<sub>3</sub> max:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c2_min", HTML("&beta;<sub>4</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c2_max", HTML("&beta;<sub>4</sub> max:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c3_min", HTML("&beta;<sub>5</sub> min:"), value = 1, step = .1)),
-                  tags$div(style="display: inline-block;vertical-align:top; width: 120px;",
-                           numericInput("s1_c3_max", HTML("&beta;<sub>5</sub> max:"), value = 1, step = .1))
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c1_min",
+                      HTML("&beta;<sub>3</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c1_max",
+                      HTML("&beta;<sub>3</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c2_min",
+                      HTML("&beta;<sub>4</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c2_max",
+                      HTML("&beta;<sub>4</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c3_min",
+                      HTML("&beta;<sub>5</sub> min:"),
+                      value = 1,
+                      step = .1
+                    )
+                  ),
+                  tags$div(
+                    style = param_style,
+                    numericInput(
+                      "s1_c3_max",
+                      HTML("&beta;<sub>5</sub> max:"),
+                      value = 1,
+                      step = .1
+                    )
+                  )
                 )
               }
             )
@@ -3216,10 +3510,9 @@ server <- function(input, output) {
           br(),
           actionButton("go", "Adjust for biases")
         )
-        )
-      }
+      )
     }
-  )
+  })
 
   output$bias_models <- renderUI({
     j <- "where j = 1:number of confounders"
@@ -3228,21 +3521,21 @@ server <- function(input, output) {
                  &alpha;<sub>2</sub>Y + &alpha;<sub>2+j</sub>C<sub>j</sub>")
       y <- HTML("logit(P(S=1)) = &beta;<sub>0</sub> + &beta;<sub>1</sub>X +
                  &beta;<sub>2</sub>Y")
-      return(HTML(paste(x, y, j, sep = '<br/>')))
+      return(HTML(paste(x, y, j, sep = "<br/>")))
     }
     if (input$method == 2) {
       x <- HTML("logit(P(U=1)) = &alpha;<sub>0</sub> + &alpha;<sub>1</sub>X +
                  &alpha;<sub>2</sub>Y")
       y <- HTML("logit(P(X=1) = &delta;<sub>0</sub> + &delta;<sub>1</sub>X* +
                  &delta;<sub>2</sub>Y + &delta;<sub>2+j</sub>C<sub>j</sub>")
-      return(HTML(paste(x, y, j, sep = '<br/>')))
+      return(HTML(paste(x, y, j, sep = "<br/>")))
     }
     if (input$method == 3) {
       x <- HTML("logit(P(X=1) = &delta;<sub>0</sub> + &delta;<sub>1</sub>X* +
                  &delta;<sub>2</sub>Y + &delta;<sub>2+j</sub>C<sub>j</sub>")
       y <- HTML("logit(P(S=1)) = &beta;<sub>0</sub> + &beta;<sub>1</sub>X* +
                  &beta;<sub>2</sub>Y + &beta;<sub>2+j</sub>C<sub>j</sub>")
-      return(HTML(paste(x, y, j, sep = '<br/>')))
+      return(HTML(paste(x, y, j, sep = "<br/>")))
     }
     if (input$method == 4) {
       x <- HTML("logit(P(U=1)) = &alpha;<sub>0</sub> + &alpha;<sub>1</sub>X +
@@ -3251,12 +3544,13 @@ server <- function(input, output) {
                  &delta;<sub>2</sub>Y + &delta;<sub>2+j</sub>C<sub>j</sub>")
       z <- HTML("logit(P(S=1)) = &beta;<sub>0</sub> + &beta;<sub>1</sub>X* +
                  &beta;<sub>2</sub>Y + &beta;<sub>2+j</sub>C<sub>j</sub>")
-      return(HTML(paste(x, y, z, j, sep = '<br/>')))
+      return(HTML(paste(x, y, z, j, sep = "<br/>")))
     }
   })
 
-# UC, Sel ----
+  # UC, Sel ----
 
+  # check if this is unnecessary
   pu1_vals <- reactive({
     c_length <- length(input$c_select)
     if (input$prob_bias_param == FALSE) {
@@ -3278,7 +3572,7 @@ server <- function(input, output) {
   })
 
   est_uc_sel <- eventReactive(input$go, {
-    
+
     showNotification("Results are loading. The loading time will vary
                       depending on the size of the data and the number of
                       bootstrap samples.")
@@ -3286,27 +3580,35 @@ server <- function(input, output) {
     registerDoParallel(cores = no_cores)
     cl <- makeCluster(no_cores)
     nreps <- input$bs_samples
-    
+
     if (input$prob_bias_param == FALSE) {
-      
+
       est <- vector(length = nreps)
       df <- data()
       pu1 <- pu1_vals()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      isolate({
-                        est[i] <- adjust_uc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = pu1,
-                                                ps1_parameters = c(input$s1_0, input$s1_xstar, input$s1_y),
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+        isolate({
+          est[i] <- adjust_uc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = pu1,
+            s_model_coefs = c(
+              input$s1_0,
+              input$s1_xstar,
+              input$s1_y
+            ),
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
@@ -3317,130 +3619,166 @@ server <- function(input, output) {
       est <- vector(length = nreps)
       df <- data()
 
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        
-                        est[i] <- adjust_uc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(rnorm(1, input$u1_0_mean, input$u1_0_sd), 
-                                                      rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd), 
-                                                      rnorm(1, input$u1_y_mean, input$u1_y_sd))
-                                                  } else if (c_length == 1) {
-                                                    c(rnorm(1, input$u1_0_mean, input$u1_0_sd), 
-                                                      rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd), 
-                                                      rnorm(1, input$u1_y_mean, input$u1_y_sd),
-                                                      rnorm(1, input$u1_c_mean, input$u1_c_sd))
-                                                  } else if (c_length == 2) {
-                                                    c(rnorm(1, input$u1_0_mean, input$u1_0_sd), 
-                                                      rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
-                                                      rnorm(1, input$u1_y_mean, input$u1_y_sd),
-                                                      rnorm(1, input$u1_c1_mean, input$u1_c1_sd),
-                                                      rnorm(1, input$u1_c2_mean, input$u1_c2_sd))
-                                                  } else if (c_length == 3) { 
-                                                    c(rnorm(1, input$u1_0_mean, input$u1_0_sd),
-                                                      rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
-                                                      rnorm(1, input$u1_y_mean, input$u1_y_sd), 
-                                                      rnorm(1, input$u1_c1_mean, input$u1_c1_sd), 
-                                                      rnorm(1, input$u1_c2_mean, input$u1_c2_sd),
-                                                      rnorm(1, input$u1_c3_mean, input$u1_c3_sd))
-                                                  },
-                                                ps1_parameters = 
-                                                  c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                    rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd), 
-                                                    rnorm(1, input$s1_y_mean, input$s1_y_sd)),
-                                                level = input$level)[[1]]
-                      })
-                    }
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$u1_0_mean, input$u1_0_sd),
+                rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
+                rnorm(1, input$u1_y_mean, input$u1_y_sd)
+              )
+            } else if (c_length == 1) {
+              c(rnorm(1, input$u1_0_mean, input$u1_0_sd),
+                rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
+                rnorm(1, input$u1_y_mean, input$u1_y_sd),
+                rnorm(1, input$u1_c_mean, input$u1_c_sd)
+              )
+            } else if (c_length == 2) {
+              c(rnorm(1, input$u1_0_mean, input$u1_0_sd),
+                rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
+                rnorm(1, input$u1_y_mean, input$u1_y_sd),
+                rnorm(1, input$u1_c1_mean, input$u1_c1_sd),
+                rnorm(1, input$u1_c2_mean, input$u1_c2_sd)
+              )
+            } else if (c_length == 3) {
+              c(rnorm(1, input$u1_0_mean, input$u1_0_sd),
+                rnorm(1, input$u1_xstar_mean, input$u1_xstar_sd),
+                rnorm(1, input$u1_y_mean, input$u1_y_sd),
+                rnorm(1, input$u1_c1_mean, input$u1_c1_sd),
+                rnorm(1, input$u1_c2_mean, input$u1_c2_sd),
+                rnorm(1, input$u1_c3_mean, input$u1_c3_sd)
+              )
+            },
+            s_model_coefs = c(
+              rnorm(1, input$s1_0_mean, input$s1_0_sd),
+              rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+              rnorm(1, input$s1_y_mean, input$s1_y_sd)
+            ),
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Uniform") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        
-                        est[i] <- adjust_uc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(runif(1, input$u1_0_min, input$u1_0_max), 
-                                                      runif(1, input$u1_xstar_min, input$u1_xstar_max), 
-                                                      runif(1, input$u1_y_min, input$u1_y_max))
-                                                  } else if (c_length == 1) {
-                                                    c(runif(1, input$u1_0_min, input$u1_0_max), 
-                                                      runif(1, input$u1_xstar_min, input$u1_xstar_max), 
-                                                      runif(1, input$u1_y_min, input$u1_y_max),
-                                                      runif(1, input$u1_c_min, input$u1_c_max))
-                                                  } else if (c_length == 2) {
-                                                    c(runif(1, input$u1_0_min, input$u1_0_max), 
-                                                      runif(1, input$u1_xstar_min, input$u1_xstar_max),
-                                                      runif(1, input$u1_y_min, input$u1_y_max),
-                                                      runif(1, input$u1_c1_min, input$u1_c1_max),
-                                                      runif(1, input$u1_c2_min, input$u1_c2_max))
-                                                  } else if (c_length == 3) {
-                                                    c(runif(1, input$u1_0_min, input$u1_0_max),
-                                                      runif(1, input$u1_xstar_min, input$u1_xstar_max),
-                                                      runif(1, input$u1_y_min, input$u1_y_max), 
-                                                      runif(1, input$u1_c1_min, input$u1_c1_max), 
-                                                      runif(1, input$u1_c2_min, input$u1_c2_max),
-                                                      runif(1, input$u1_c3_min, input$u1_c3_max))
-                                                  },
-                                                ps1_parameters = 
-                                                  c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                    runif(1, input$s1_xstar_min, input$s1_xstar_max), 
-                                                    runif(1, input$s1_y_min, input$s1_y_max)),
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = if (c_length == 0) {
+              c(runif(1, input$u1_0_min, input$u1_0_max),
+                runif(1, input$u1_xstar_min, input$u1_xstar_max),
+                runif(1, input$u1_y_min, input$u1_y_max))
+            } else if (c_length == 1) {
+              c(runif(1, input$u1_0_min, input$u1_0_max),
+                runif(1, input$u1_xstar_min, input$u1_xstar_max),
+                runif(1, input$u1_y_min, input$u1_y_max),
+                runif(1, input$u1_c_min, input$u1_c_max)
+              )
+            } else if (c_length == 2) {
+              c(runif(1, input$u1_0_min, input$u1_0_max),
+                runif(1, input$u1_xstar_min, input$u1_xstar_max),
+                runif(1, input$u1_y_min, input$u1_y_max),
+                runif(1, input$u1_c1_min, input$u1_c1_max),
+                runif(1, input$u1_c2_min, input$u1_c2_max)
+              )
+            } else if (c_length == 3) {
+              c(runif(1, input$u1_0_min, input$u1_0_max),
+                runif(1, input$u1_xstar_min, input$u1_xstar_max),
+                runif(1, input$u1_y_min, input$u1_y_max),
+                runif(1, input$u1_c1_min, input$u1_c1_max),
+                runif(1, input$u1_c2_min, input$u1_c2_max),
+                runif(1, input$u1_c3_min, input$u1_c3_max)
+              )
+            },
+            s_model_coefs = c(
+              runif(1, input$s1_0_min, input$s1_0_max),
+              runif(1, input$s1_xstar_min, input$s1_xstar_max),
+              runif(1, input$s1_y_min, input$s1_y_max)
+            ),
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
   }, ignoreInit = TRUE)
-  
+
   output$final1a <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub>:</b>", round(median(est_uc_sel()), 2)))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub>:</b>",
+        round(median(est_uc_sel()), 2)
+      )
+    )
   })
-  
+
   output$final1b <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (", 
-               round(quantile(est_uc_sel(), (1 - input$level) - ((1 - input$level) / 2)), 2),
-               ", ",
-               round(quantile(est_uc_sel(), input$level + ((1 - input$level) / 2)), 2),
-               ")",
-               sep = ""))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (",
+        round(
+          quantile(
+            est_uc_sel(),
+            (1 - input$level) - ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ", ",
+        round(
+          quantile(
+            est_uc_sel(),
+            input$level + ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ")",
+        sep = ""
+      )
+    )
   })
-  
+
   output$final1c <- renderPlot({
     req(input$file)
-    hist(est_uc_sel(),
-         main = "Distribution of bias-adjusted estimates from bootstrap samples",
-         xlab = expression('OR'["YX"]),
-         col = "red")
+    hist(
+      est_uc_sel(),
+      main = "Distribution of bias-adjusted estimates from bootstrap samples",
+      xlab = expression('OR'["YX"]),
+      col = "red"
+    )
   })
-  
-# UC, EMC ----  
-  
+
+  # UC, EMC ----
+
   px1_vals <- reactive({
     c_length <- length(input$c_select)
     if (c_length == 0) {
@@ -3458,9 +3796,9 @@ server <- function(input, output) {
                input$x1_c1, input$x1_c2, input$x1_c3))
     }
   })
-  
-  est_uc_mc <- eventReactive(input$go, {
-    
+
+  est_uc_emc <- eventReactive(input$go, {
+
     showNotification("Results are loading. The loading time will vary
                       depending on the size of the data and the number of
                       bootstrap samples.")
@@ -3468,160 +3806,193 @@ server <- function(input, output) {
     registerDoParallel(cores = no_cores)
     cl <- makeCluster(no_cores)
     nreps <- input$bs_samples
-    
+
     if (input$prob_bias_param == FALSE) {
-      
+
       est <- vector(length = nreps)
       df <- data()
       px1 <- px1_vals()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      isolate({
-                        est[i] <- adjust_uc_mc2(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = c(input$u1_0, input$u1_x, input$u1_y),
-                                                px1_parameters = px1,
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+        isolate({
+          est[i] <- adjust_uc_emc(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(input$u1_0, input$u1_x, input$u1_y),
+            x_model_coefs = px1,
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Normal") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        
-                        est[i] <- adjust_uc_mc2(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = 
-                                                  c(rnorm(1, input$u1_0_mean, input$u1_0_sd), 
-                                                    rnorm(1, input$u1_x_mean, input$u1_x_sd), 
-                                                    rnorm(1, input$u1_y_mean, input$u1_y_sd)),
-                                                px1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd))
-                                                  } else if (c_length == 1) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                      rnorm(1, input$x1_c_mean, input$x1_c_sd))
-                                                  } else if (c_length == 2) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                      rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
-                                                      rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
-                                                  } else if (c_length == 3) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd), 
-                                                      rnorm(1, input$x1_c1_mean, input$x1_c1_sd), 
-                                                      rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
-                                                      rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
-                                                  },
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_emc(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(
+              rnorm(1, input$u1_0_mean, input$u1_0_sd),
+              rnorm(1, input$u1_x_mean, input$u1_x_sd),
+              rnorm(1, input$u1_y_mean, input$u1_y_sd)
+            ),
+            x_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c_mean, input$x1_c_sd))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
+            } else if (c_length == 3) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
+                rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Uniform") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        
-                        est[i] <- adjust_uc_mc2(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                pu1_parameters = 
-                                                  c(rnorm(1, input$u1_0_min, input$u1_0_max), 
-                                                    rnorm(1, input$u1_x_min, input$u1_x_max), 
-                                                    rnorm(1, input$u1_y_min, input$u1_y_max)),
-                                                px1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(rnorm(1, input$x1_0_min, input$x1_0_max), 
-                                                      rnorm(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                      rnorm(1, input$x1_y_min, input$x1_y_max))
-                                                  } else if (c_length == 1) {
-                                                    c(rnorm(1, input$x1_0_min, input$x1_0_max), 
-                                                      rnorm(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                      rnorm(1, input$x1_y_min, input$x1_y_max),
-                                                      rnorm(1, input$x1_c_min, input$x1_c_max))
-                                                  } else if (c_length == 2) {
-                                                    c(rnorm(1, input$x1_0_min, input$x1_0_max), 
-                                                      rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                      rnorm(1, input$x1_y_min, input$x1_y_max),
-                                                      rnorm(1, input$x1_c1_min, input$x1_c1_max),
-                                                      rnorm(1, input$x1_c2_min, input$x1_c2_max))
-                                                  } else if (c_length == 3) {
-                                                    c(rnorm(1, input$x1_0_min, input$x1_0_max),
-                                                      rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                      rnorm(1, input$x1_y_min, input$x1_y_max), 
-                                                      rnorm(1, input$x1_c1_min, input$x1_c1_max), 
-                                                      rnorm(1, input$x1_c2_min, input$x1_c2_max),
-                                                      rnorm(1, input$x1_c3_min, input$x1_c3_max))
-                                                  },
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_emc(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(
+              rnorm(1, input$u1_0_min, input$u1_0_max),
+              rnorm(1, input$u1_x_min, input$u1_x_max),
+              rnorm(1, input$u1_y_min, input$u1_y_max)
+            ),
+            x_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$x1_0_min, input$x1_0_max),
+                rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
+                rnorm(1, input$x1_y_min, input$x1_y_max))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$x1_0_min, input$x1_0_max),
+                rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
+                rnorm(1, input$x1_y_min, input$x1_y_max),
+                rnorm(1, input$x1_c_min, input$x1_c_max))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$x1_0_min, input$x1_0_max),
+                rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
+                rnorm(1, input$x1_y_min, input$x1_y_max),
+                rnorm(1, input$x1_c1_min, input$x1_c1_max),
+                rnorm(1, input$x1_c2_min, input$x1_c2_max))
+            } else if (c_length == 3) {
+              c(rnorm(1, input$x1_0_min, input$x1_0_max),
+                rnorm(1, input$x1_xstar_min, input$x1_xstar_max),
+                rnorm(1, input$x1_y_min, input$x1_y_max),
+                rnorm(1, input$x1_c1_min, input$x1_c1_max),
+                rnorm(1, input$x1_c2_min, input$x1_c2_max),
+                rnorm(1, input$x1_c3_min, input$x1_c3_max))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
   }, ignoreInit = TRUE)
-  
+
   output$final2a <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub>:</b>", round(median(est_uc_mc()), 2)))
-  })
-  
-  output$final2b <- renderUI({
-    req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (", 
-               round(quantile(est_uc_mc(), (1 - input$level) - ((1 - input$level) / 2)), 2),
-               ", ",
-               round(quantile(est_uc_mc(), input$level + ((1 - input$level) / 2)), 2),
-               ")",
-               sep = ""))
-  })
-  
-  output$final2c <- renderPlot({
-    req(input$file)
-    hist(est_uc_mc(),
-         main = "Distribution of bias-adjusted estimates from bootstrap samples",
-         xlab = expression('OR'["YX"]),
-         col = "red")
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub>:</b>",
+        round(median(est_uc_emc()), 2)
+      )
+    )
   })
 
-# EMC, Sel ---- 
+  output$final2b <- renderUI({
+    req(input$file)
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (",
+        round(
+          quantile(
+            est_uc_emc(),
+            (1 - input$level) - ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ", ",
+        round(
+          quantile(
+            est_uc_emc(),
+            input$level + ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ")",
+        sep = ""
+      )
+    )
+  })
+
+  output$final2c <- renderPlot({
+    req(input$file)
+    hist(
+      est_uc_emc(),
+      main = "Distribution of bias-adjusted estimates from bootstrap samples",
+      xlab = expression('OR'["YX"]),
+      col = "red"
+    )
+  })
+
+  # EMC, Sel ----
 
   ps1_vals <- reactive({
     c_length <- length(input$c_select)
@@ -3640,9 +4011,9 @@ server <- function(input, output) {
                input$s1_c1, input$s1_c2, input$s1_c3))
     }
   })
-  
-  est_mc_sel <- eventReactive(input$go, {
-    
+
+  est_emc_sel <- eventReactive(input$go, {
+
     showNotification("Results are loading. The loading time will vary
                       depending on the size of the data and the number of
                       bootstrap samples.")
@@ -3650,202 +4021,232 @@ server <- function(input, output) {
     registerDoParallel(cores = no_cores)
     cl <- makeCluster(no_cores)
     nreps <- input$bs_samples
-    
+
     if (input$prob_bias_param == FALSE) {
-      
+
       est <- vector(length = nreps)
       df <- data()
       px1 <- px1_vals()
       ps1 <- ps1_vals()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      isolate({
-                        est[i] <- adjust_mc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                px1_parameters = px1,
-                                                ps1_parameters = ps1,
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+        isolate({
+          est[i] <- adjust_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            x_model_coefs = px1,
+            s_model_coefs = ps1,
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Normal") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        est[i] <- adjust_mc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                px1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd))
-                                                  } else if (c_length == 1) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                      rnorm(1, input$x1_c_mean, input$x1_c_sd))
-                                                  } else if (c_length == 2) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                      rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
-                                                      rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
-                                                  } else if (c_length == 3) {
-                                                    c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
-                                                      rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                      rnorm(1, input$x1_y_mean, input$x1_y_sd), 
-                                                      rnorm(1, input$x1_c1_mean, input$x1_c1_sd), 
-                                                      rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
-                                                      rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
-                                                  },
-                                                ps1_parameters =
-                                                  if (c_length == 0) {
-                                                    c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                      rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd), 
-                                                      rnorm(1, input$s1_y_mean, input$s1_y_sd))
-                                                  } else if (c_length == 1) { 
-                                                    c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                      rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd), 
-                                                      rnorm(1, input$s1_y_mean, input$s1_y_sd),
-                                                      rnorm(1, input$s1_c_mean, input$s1_c_sd))
-                                                  } else if (c_length == 2) {
-                                                    c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                      rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
-                                                      rnorm(1, input$s1_y_mean, input$s1_y_sd),
-                                                      rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
-                                                      rnorm(1, input$s1_c2_mean, input$s1_c2_sd))
-                                                  } else if (c_length == 3) { 
-                                                    c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
-                                                      rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
-                                                      rnorm(1, input$s1_y_mean, input$s1_y_sd), 
-                                                      rnorm(1, input$s1_c1_mean, input$s1_c1_sd), 
-                                                      rnorm(1, input$s1_c2_mean, input$s1_c2_sd),
-                                                      rnorm(1, input$s1_c3_mean, input$s1_c3_sd))
-                                                  },
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            x_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c_mean, input$x1_c_sd))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
+            } else if (c_length == 3) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
+                rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
+            },
+            s_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c_mean, input$s1_c_sd))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
+                rnorm(1, input$s1_c2_mean, input$s1_c2_sd))
+            } else if (c_length == 3) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
+                rnorm(1, input$s1_c2_mean, input$s1_c2_sd),
+                rnorm(1, input$s1_c3_mean, input$s1_c3_sd))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Uniform") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        est[i] <- adjust_mc_sel(data = bdf,
-                                                exposure = input$x_select,
-                                                outcome = input$y_select,
-                                                confounders = input$c_select,
-                                                px1_parameters = 
-                                                  if (c_length == 0) {
-                                                    c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                      runif(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                      runif(1, input$x1_y_min, input$x1_y_max))
-                                                  } else if (c_length == 1) {
-                                                    c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                      runif(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                      runif(1, input$x1_y_min, input$x1_y_max),
-                                                      runif(1, input$x1_c_min, input$x1_c_max))
-                                                  } else if (c_length == 2) {
-                                                    c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                      runif(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                      runif(1, input$x1_y_min, input$x1_y_max),
-                                                      runif(1, input$x1_c1_min, input$x1_c1_max),
-                                                      runif(1, input$x1_c2_min, input$x1_c2_max))
-                                                  } else if (c_length == 3) {
-                                                    c(runif(1, input$x1_0_min, input$x1_0_max),
-                                                      runif(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                      runif(1, input$x1_y_min, input$x1_y_max), 
-                                                      runif(1, input$x1_c1_min, input$x1_c1_max), 
-                                                      runif(1, input$x1_c2_min, input$x1_c2_max),
-                                                      runif(1, input$x1_c3_min, input$x1_c3_max))
-                                                  },
-                                                ps1_parameters =
-                                                  if (c_length == 0) {
-                                                    c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                      runif(1, input$s1_xstar_min, input$s1_xstar_max), 
-                                                      runif(1, input$s1_y_min, input$s1_y_max))
-                                                  } else if (c_length == 1) {
-                                                    c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                      runif(1, input$s1_xstar_min, input$s1_xstar_max), 
-                                                      runif(1, input$s1_y_min, input$s1_y_max),
-                                                      runif(1, input$s1_c_min, input$s1_c_max))
-                                                  } else if (c_length == 2) {
-                                                    c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                      runif(1, input$s1_xstar_min, input$s1_xstar_max),
-                                                      runif(1, input$s1_y_min, input$s1_y_max),
-                                                      runif(1, input$s1_c1_min, input$s1_c1_max),
-                                                      runif(1, input$s1_c2_min, input$s1_c2_max))
-                                                  } else if (c_length == 3) {
-                                                    c(runif(1, input$s1_0_min, input$s1_0_max),
-                                                      runif(1, input$s1_xstar_min, input$s1_xstar_max),
-                                                      runif(1, input$s1_y_min, input$s1_y_max), 
-                                                      runif(1, input$s1_c1_min, input$s1_c1_max), 
-                                                      runif(1, input$s1_c2_min, input$s1_c2_max),
-                                                      runif(1, input$s1_c3_min, input$s1_c3_max))
-                                                  },
-                                                level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            x_model_coefs = if (c_length == 0) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max))
+            } else if (c_length == 1) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c_min, input$x1_c_max))
+            } else if (c_length == 2) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c1_min, input$x1_c1_max),
+                runif(1, input$x1_c2_min, input$x1_c2_max))
+            } else if (c_length == 3) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c1_min, input$x1_c1_max),
+                runif(1, input$x1_c2_min, input$x1_c2_max),
+                runif(1, input$x1_c3_min, input$x1_c3_max))
+            },
+            s_model_coefs = if (c_length == 0) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max))
+            } else if (c_length == 1) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c_min, input$s1_c_max))
+            } else if (c_length == 2) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c1_min, input$s1_c1_max),
+                runif(1, input$s1_c2_min, input$s1_c2_max))
+            } else if (c_length == 3) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c1_min, input$s1_c1_max),
+                runif(1, input$s1_c2_min, input$s1_c2_max),
+                runif(1, input$s1_c3_min, input$s1_c3_max))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
   }, ignoreInit = TRUE)
-  
+
   output$final3a <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub>:</b>", round(median(est_mc_sel()), 2)))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub>:</b>",
+        round(median(est_emc_sel()), 2)
+      )
+    )
   })
-  
+
   output$final3b <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (", 
-               round(quantile(est_mc_sel(), (1 - input$level) - ((1 - input$level) / 2)), 2),
-               ", ",
-               round(quantile(est_mc_sel(), input$level + ((1 - input$level) / 2)), 2),
-               ")",
-               sep = ""))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (",
+        round(
+          quantile(
+            est_emc_sel(),
+            (1 - input$level) - ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ", ",
+        round(
+          quantile(
+            est_emc_sel(), input$level + ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ")",
+        sep = ""
+      )
+    )
   })
-  
+
   output$final3c <- renderPlot({
     req(input$file)
-    hist(est_mc_sel(),
-         main = "Distribution of bias-adjusted estimates from bootstrap samples",
-         xlab = expression('OR'["YX"]),
-         col = "red")
+    hist(
+      est_emc_sel(),
+      main = "Distribution of bias-adjusted estimates from bootstrap samples",
+      xlab = expression('OR'["YX"]),
+      col = "red"
+    )
   })
 
-# UC, MC, Sel ----
+  # UC, EMC, Sel ----
 
-  est_uc_mc_sel <- eventReactive(input$go, {
-    
+  est_uc_emc_sel <- eventReactive(input$go, {
+
     showNotification("Results are loading. The loading time will vary
                       depending on the size of the data and the number of
                       bootstrap samples.")
@@ -3853,209 +4254,246 @@ server <- function(input, output) {
     registerDoParallel(cores = no_cores)
     cl <- makeCluster(no_cores)
     nreps <- input$bs_samples
-    
+
     if (input$prob_bias_param == FALSE) {
-      
+
       est <- vector(length = nreps)
       df <- data()
       px1 <- px1_vals()
       ps1 <- ps1_vals()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      isolate({
-                        est[i] <- adjust_uc_mc_sel2(data = bdf,
-                                                    exposure = input$x_select,
-                                                    outcome = input$y_select,
-                                                    confounders = input$c_select,
-                                                    pu1_parameters = c(input$u1_0, input$u1_x, input$u1_y),
-                                                    px1_parameters = px1,
-                                                    ps1_parameters = ps1,
-                                                    level = input$level)[[1]]
-                        
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(
+              input$u1_0,
+              input$u1_x,
+              input$u1_y
+            ),
+            x_model_coefs = px1,
+            s_model_coefs = ps1,
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Normal") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        est[i] <- adjust_uc_mc_sel2(data = bdf,
-                                                    exposure = input$x_select,
-                                                    outcome = input$y_select,
-                                                    confounders = input$c_select,
-                                                    pu1_parameters = 
-                                                      c(rnorm(1, input$u1_0_mean, input$u1_0_sd), 
-                                                        rnorm(1, input$u1_x_mean, input$u1_x_sd), 
-                                                        rnorm(1, input$u1_y_mean, input$u1_y_sd)),
-                                                    px1_parameters = 
-                                                      if (c_length == 0) {
-                                                        c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                          rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                          rnorm(1, input$x1_y_mean, input$x1_y_sd))
-                                                      } else if (c_length == 1) {
-                                                        c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                          rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd), 
-                                                          rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                          rnorm(1, input$x1_c_mean, input$x1_c_sd))
-                                                      } else if (c_length == 2) {
-                                                        c(rnorm(1, input$x1_0_mean, input$x1_0_sd), 
-                                                          rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                          rnorm(1, input$x1_y_mean, input$x1_y_sd),
-                                                          rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
-                                                          rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
-                                                      } else if (c_length == 3) {
-                                                        c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
-                                                          rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
-                                                          rnorm(1, input$x1_y_mean, input$x1_y_sd), 
-                                                          rnorm(1, input$x1_c1_mean, input$x1_c1_sd), 
-                                                          rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
-                                                          rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
-                                                      },
-                                                    ps1_parameters =
-                                                      if (c_length == 0) {
-                                                        c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                          rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd), 
-                                                          rnorm(1, input$s1_y_mean, input$s1_y_sd))
-                                                      } else if (c_length == 1) { 
-                                                        c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                          rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd), 
-                                                          rnorm(1, input$s1_y_mean, input$s1_y_sd),
-                                                          rnorm(1, input$s1_c_mean, input$s1_c_sd))
-                                                      } else if (c_length == 2) {
-                                                        c(rnorm(1, input$s1_0_mean, input$s1_0_sd), 
-                                                          rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
-                                                          rnorm(1, input$s1_y_mean, input$s1_y_sd),
-                                                          rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
-                                                          rnorm(1, input$s1_c2_mean, input$s1_c2_sd))
-                                                      } else if (c_length == 3) { 
-                                                        c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
-                                                          rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
-                                                          rnorm(1, input$s1_y_mean, input$s1_y_sd), 
-                                                          rnorm(1, input$s1_c1_mean, input$s1_c1_sd), 
-                                                          rnorm(1, input$s1_c2_mean, input$s1_c2_sd),
-                                                          rnorm(1, input$s1_c3_mean, input$s1_c3_sd))
-                                                      },
-                                                    level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(
+              rnorm(1, input$u1_0_mean, input$u1_0_sd),
+              rnorm(1, input$u1_x_mean, input$u1_x_sd),
+              rnorm(1, input$u1_y_mean, input$u1_y_sd)
+            ),
+            x_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c_mean, input$x1_c_sd))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd))
+            } else if (c_length == 3) {
+              c(rnorm(1, input$x1_0_mean, input$x1_0_sd),
+                rnorm(1, input$x1_xstar_mean, input$x1_xstar_sd),
+                rnorm(1, input$x1_y_mean, input$x1_y_sd),
+                rnorm(1, input$x1_c1_mean, input$x1_c1_sd),
+                rnorm(1, input$x1_c2_mean, input$x1_c2_sd),
+                rnorm(1, input$x1_c3_mean, input$x1_c3_sd))
+            },
+            s_model_coefs = if (c_length == 0) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd))
+            } else if (c_length == 1) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c_mean, input$s1_c_sd))
+            } else if (c_length == 2) {
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
+                rnorm(1, input$s1_c2_mean, input$s1_c2_sd))
+            } else if (c_length == 3) { 
+              c(rnorm(1, input$s1_0_mean, input$s1_0_sd),
+                rnorm(1, input$s1_xstar_mean, input$s1_xstar_sd),
+                rnorm(1, input$s1_y_mean, input$s1_y_sd),
+                rnorm(1, input$s1_c1_mean, input$s1_c1_sd),
+                rnorm(1, input$s1_c2_mean, input$s1_c2_sd),
+                rnorm(1, input$s1_c3_mean, input$s1_c3_sd))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
-    
+
     if (input$prob_bias_param == TRUE & input$distribution == "Uniform") {
-      
+
       c_length <- length(input$c_select)
       est <- vector(length = nreps)
       df <- data()
-      
-      or <- foreach(i = 1:nreps, .combine = c, .packages = 'dplyr', 
-                    .export = c("input", "isolate", "df", "pu1")) %dopar% {
-                      
-                      bdf <- df[sample(1:nrow(df), nrow(df), replace = TRUE),]
-                      
-                      isolate({
-                        est[i] <- adjust_uc_mc_sel2(data = bdf,
-                                                    exposure = input$x_select,
-                                                    outcome = input$y_select,
-                                                    confounders = input$c_select,
-                                                    pu1_parameters = 
-                                                      c(rnorm(1, input$u1_0_min, input$u1_0_max), 
-                                                        rnorm(1, input$u1_x_min, input$u1_x_max), 
-                                                        rnorm(1, input$u1_y_min, input$u1_y_max)),
-                                                    px1_parameters = 
-                                                      if (c_length == 0) {
-                                                        c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                          runif(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                          runif(1, input$x1_y_min, input$x1_y_max))
-                                                      } else if (c_length == 1) {
-                                                        c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                          runif(1, input$x1_xstar_min, input$x1_xstar_max), 
-                                                          runif(1, input$x1_y_min, input$x1_y_max),
-                                                          runif(1, input$x1_c_min, input$x1_c_max))
-                                                      } else if (c_length == 2) {
-                                                        c(runif(1, input$x1_0_min, input$x1_0_max), 
-                                                          runif(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                          runif(1, input$x1_y_min, input$x1_y_max),
-                                                          runif(1, input$x1_c1_min, input$x1_c1_max),
-                                                          runif(1, input$x1_c2_min, input$x1_c2_max))
-                                                      } else if (c_length == 3) {
-                                                        c(runif(1, input$x1_0_min, input$x1_0_max),
-                                                          runif(1, input$x1_xstar_min, input$x1_xstar_max),
-                                                          runif(1, input$x1_y_min, input$x1_y_max), 
-                                                          runif(1, input$x1_c1_min, input$x1_c1_max), 
-                                                          runif(1, input$x1_c2_min, input$x1_c2_max),
-                                                          runif(1, input$x1_c3_min, input$x1_c3_max))
-                                                      },
-                                                    ps1_parameters =
-                                                      if (c_length == 0) {
-                                                        c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                          runif(1, input$s1_xstar_min, input$s1_xstar_max), 
-                                                          runif(1, input$s1_y_min, input$s1_y_max))
-                                                      } else if (c_length == 1) {
-                                                        c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                          runif(1, input$s1_xstar_min, input$s1_xstar_max), 
-                                                          runif(1, input$s1_y_min, input$s1_y_max),
-                                                          runif(1, input$s1_c_min, input$s1_c_max))
-                                                      } else if (c_length == 2) {
-                                                        c(runif(1, input$s1_0_min, input$s1_0_max), 
-                                                          runif(1, input$s1_xstar_min, input$s1_xstar_max),
-                                                          runif(1, input$s1_y_min, input$s1_y_max),
-                                                          runif(1, input$s1_c1_min, input$s1_c1_max),
-                                                          runif(1, input$s1_c2_min, input$s1_c2_max))
-                                                      } else if (c_length == 3) {
-                                                        c(runif(1, input$s1_0_min, input$s1_0_max),
-                                                          runif(1, input$s1_xstar_min, input$s1_xstar_max),
-                                                          runif(1, input$s1_y_min, input$s1_y_max), 
-                                                          runif(1, input$s1_c1_min, input$s1_c1_max), 
-                                                          runif(1, input$s1_c2_min, input$s1_c2_max),
-                                                          runif(1, input$s1_c3_min, input$s1_c3_max))
-                                                      },
-                                                    level = input$level)[[1]]
-                      })
-                    }
+
+      or <- foreach(
+        i = 1:nreps, .combine = c, .packages = c("dplyr", "multibias"),
+        .export = c("input", "isolate")
+      ) %dopar% {
+
+        bdf <- df[sample(seq_len(nrow(df)), nrow(df), replace = TRUE), ]
+
+        isolate({
+          est[i] <- adjust_uc_emc_sel(
+            data = bdf,
+            exposure = input$x_select,
+            outcome = input$y_select,
+            confounders = input$c_select,
+            u_model_coefs = c(
+              rnorm(1, input$u1_0_min, input$u1_0_max),
+              rnorm(1, input$u1_x_min, input$u1_x_max),
+              rnorm(1, input$u1_y_min, input$u1_y_max)
+            ),
+            x_model_coefs = if (c_length == 0) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max))
+            } else if (c_length == 1) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c_min, input$x1_c_max))
+            } else if (c_length == 2) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c1_min, input$x1_c1_max),
+                runif(1, input$x1_c2_min, input$x1_c2_max))
+            } else if (c_length == 3) {
+              c(runif(1, input$x1_0_min, input$x1_0_max),
+                runif(1, input$x1_xstar_min, input$x1_xstar_max),
+                runif(1, input$x1_y_min, input$x1_y_max),
+                runif(1, input$x1_c1_min, input$x1_c1_max),
+                runif(1, input$x1_c2_min, input$x1_c2_max),
+                runif(1, input$x1_c3_min, input$x1_c3_max))
+            },
+            s_model_coefs = if (c_length == 0) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max))
+            } else if (c_length == 1) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c_min, input$s1_c_max))
+            } else if (c_length == 2) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c1_min, input$s1_c1_max),
+                runif(1, input$s1_c2_min, input$s1_c2_max))
+            } else if (c_length == 3) {
+              c(runif(1, input$s1_0_min, input$s1_0_max),
+                runif(1, input$s1_xstar_min, input$s1_xstar_max),
+                runif(1, input$s1_y_min, input$s1_y_max),
+                runif(1, input$s1_c1_min, input$s1_c1_max),
+                runif(1, input$s1_c2_min, input$s1_c2_max),
+                runif(1, input$s1_c3_min, input$s1_c3_max))
+            },
+            level = input$level
+          )$estimate
+        })
+      }
       stopCluster(cl)
       return(or)
     }
   }, ignoreInit = TRUE)
-  
+
   output$final4a <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub>:</b>", round(median(est_uc_mc_sel()), 2)))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub>:</b>",
+        round(median(est_uc_emc_sel()), 2)
+      )
+    )
   })
-  
+
   output$final4b <- renderUI({
     req(input$file)
-    HTML(paste("<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (", 
-               round(quantile(est_uc_mc_sel(), (1 - input$level) - ((1 - input$level) / 2)), 2),
-               ", ",
-               round(quantile(est_uc_mc_sel(), input$level + ((1 - input$level) / 2)), 2),
-               ")",
-               sep = ""))
+    HTML(
+      paste(
+        "<b>Bias-adjusted OR<sub>YX</sub> confidence interval:</b> (",
+        round(
+          quantile(
+            est_uc_emc_sel(),
+            (1 - input$level) - ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ", ",
+        round(
+          quantile(
+            est_uc_emc_sel(),
+            input$level + ((1 - input$level) / 2)
+          ),
+          2
+        ),
+        ")",
+        sep = ""
+      )
+    )
   })
-  
+
   output$final4c <- renderPlot({
     req(input$file)
-    hist(est_uc_mc_sel(),
-         main = "Distribution of bias-adjusted estimates from bootstrap samples",
-         xlab = expression('OR'["YX"]),
-         col = "red")
+    hist(
+      est_uc_emc_sel(),
+      main = "Distribution of bias-adjusted estimates from bootstrap samples",
+      xlab = expression('OR'["YX"]),
+      col = "red"
+    )
   })
-  
-    }
+
+}
 
 # Run the application
 shinyApp(ui = ui, server = server)
