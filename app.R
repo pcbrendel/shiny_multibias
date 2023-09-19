@@ -16,8 +16,16 @@ ui <- navbarPage(
   theme = shinytheme("flatly"),
   tabPanel(
     "Instructions",
-    tags$b("This application provides a tool for the simultaneous adjustment 
-           of any combination of uncontrolled confounding, exposure 
+    tags$style(
+      HTML(".section-header {
+              font-size: 24px; /* Adjust the font size as needed */
+              font-weight: bold;
+              margin-bottom: 10px; /* Add spacing below the header */
+            }")
+    ),
+    HTML("<p class='section-header'>Instructions</p>"),
+    tags$b("Simultaneously adjust an effect estimate for
+           any combination of uncontrolled confounding, exposure 
            misclassification, and selection bias."),
     br(),
     br(),
@@ -52,8 +60,24 @@ ui <- navbarPage(
       tags$li("S = selection")
     ),
     br(),
-    "Created by Paul Brendel and Onyebuchi Arah. Please submit any bug reports 
-    to pcbrendel@gmail.com.",
+    HTML("<p class='section-header'>Citations</p>"),
+    "Please use the following citation when using this website:",
+    br(),
+    tags$ul(
+      tags$li(
+        HTML(
+          "Brendel PB, Torres AZ, Arah OA, Simultaneous adjustment of
+           uncontrolled confounding, selection bias and misclassification <br> 
+           in multiple-bias modelling, International Journal of Epidemiology,
+           Volume 52, Issue 4, Pages 1220–1230 
+           <a href='https://doi.org/10.1093/ije/dyad001' target='_blank'>Link</a>"
+        )
+      )
+    ),
+    br(),
+    tags$b("Created by Paul Brendel with guidance from Onyebuchi Arah."),
+    br(),
+    HTML("Please submit any bug reports by opening an issue on <a href='https://github.com/pcbrendel/shiny_multibias/issues' target='_blank'>Github</a>."),
     br(),
     br(),
     h5(
